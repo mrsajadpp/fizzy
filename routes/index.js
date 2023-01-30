@@ -3,6 +3,9 @@ var ytdl = require('ytdl-core');
 const Spotify = require('spotifydl-core').default
 var ffmpeg = require('fluent-ffmpeg');
 let path = require('path');
+let fs = require('fs');
+let http = require('http');
+let request = require('request');
 //ffmpeg.setFfmpegPath("/app/vendor/ffmpeg/bin");
 var data = require('../database/data');
 var validUrl = require('valid-url');
@@ -65,16 +68,12 @@ router.post('/api/instagram/download', (req, res, next) => {
         })
       } else {
         if (req.body.type === 'mp4') {
-          modules.getDirUrl(req.body.url).then((url) => {
-            getVideoDurationInSeconds(url).then((duration) => {
+          modules.getDirUrl(req.body.url).then( async (url) => {
               res.writeHead(200, {
                 "Content-Disposition": "attachment;filename=Instagram - " + new Date() + " - | Fizzy - fizzy.traceinc.in.mp4",
-                'Content-Type': 'video/mp4',
-                'Content-Length': duration
+                'Content-Type': 'video/mp4'
               });
-              res.write(url, 'binary');
-              res.end()
-            })
+              request(url).pipe(res);
           })
         }
       }

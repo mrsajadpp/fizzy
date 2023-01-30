@@ -10,8 +10,8 @@ module.exports = {
                 setTimeout(async () => {
                     let src = await page.$eval("video", n => n.getAttribute("src")).catch((err) => { console.error(err) });
                     console.log(src);
-                    resolve(src)
-                    await launch.close().catch((err) => { console.error(err) });;
+                    resolve(src);
+                    await launch.close().catch((err) => { console.error(err) });
                 }, 3000)
             } catch (err) {
                 console.error(err)
