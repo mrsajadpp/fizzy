@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /yt
+Allow: /ig
+Allow: /spotify
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.mp4$

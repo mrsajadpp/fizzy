@@ -1,0 +1,438 @@
+<style>
+    .flexbox {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+
+    .loader {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        background-color: #0f0f0f;
+    }
+
+    /* MESH LOADER */
+
+    .mesh-loader {
+        overflow: hidden;
+        height: inherit;
+        width: inherit;
+    }
+
+    .mesh-loader .circle {
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        background: #f44336;
+        border-radius: 50%;
+        margin: -15px;
+        -webkit-animation: mesh 3s ease-in-out infinite -1.5s;
+        animation: mesh 3s ease-in-out infinite -1.5s;
+    }
+
+    .mesh-loader>div .circle:last-child {
+        -webkit-animation-delay: 0s;
+        animation-delay: 0s;
+    }
+
+    .mesh-loader>div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+
+    .mesh-loader>div:last-child {
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+
+    @-webkit-keyframes rotate {
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes rotate {
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    -webkit-@keyframes spin {
+        -webkit-from {
+            -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        -webkit-to {
+            -webkit-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @-webkit-keyframes spin {
+        from {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        to {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        from {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        to {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @-webkit-keyframes spinBack {
+        from {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        to {
+            -webkit-transform: rotate(-720deg);
+            transform: rotate(-720deg);
+        }
+    }
+
+    @keyframes spinBack {
+        from {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        to {
+            -webkit-transform: rotate(-720deg);
+            transform: rotate(-720deg);
+        }
+    }
+
+    @-webkit-keyframes spinBorder {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            border-width: 15px;
+        }
+
+        50% {
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+            border-width: 3px;
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+            border-width: 15px;
+        }
+    }
+
+    @keyframes spinBorder {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            border-width: 15px;
+        }
+
+        50% {
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+            border-width: 3px;
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+            border-width: 15px;
+        }
+    }
+
+    @-webkit-keyframes grow {
+
+        0%,
+        40%,
+        100% {
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        }
+
+        40% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+    }
+
+    @keyframes grow {
+
+        0%,
+        40%,
+        100% {
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        }
+
+        40% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+    }
+
+    @-webkit-keyframes triforce {
+        0% {
+            border-bottom-color: rgb(206, 181, 2);
+        }
+
+        40% {
+            border-bottom-color: rgba(206, 181, 2, 0);
+        }
+
+        80% {
+            border-bottom-color: rgb(206, 181, 2);
+        }
+
+        100% {
+            border-bottom-color: rgb(206, 181, 2);
+        }
+    }
+
+    @keyframes triforce {
+        0% {
+            border-bottom-color: rgb(206, 181, 2);
+        }
+
+        40% {
+            border-bottom-color: rgba(206, 181, 2, 0);
+        }
+
+        80% {
+            border-bottom-color: rgb(206, 181, 2);
+        }
+
+        100% {
+            border-bottom-color: rgb(206, 181, 2);
+        }
+    }
+
+    @-webkit-keyframes pulsate {
+        0% {
+            -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+        }
+
+        5% {
+            -webkit-transform: rotate(45deg) scale(0.9);
+            transform: rotate(45deg) scale(0.9);
+        }
+
+        10% {
+            -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+        }
+
+        15% {
+            -webkit-transform: rotate(45deg) scale(1);
+            transform: rotate(45deg) scale(1);
+        }
+
+        50% {
+            -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+        }
+
+        100% {
+            -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+        }
+    }
+
+    @keyframes pulsate {
+        0% {
+            -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+        }
+
+        5% {
+            -webkit-transform: rotate(45deg) scale(0.9);
+            transform: rotate(45deg) scale(0.9);
+        }
+
+        10% {
+            -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+        }
+
+        15% {
+            -webkit-transform: rotate(45deg) scale(1);
+            transform: rotate(45deg) scale(1);
+        }
+
+        50% {
+            -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+        }
+
+        100% {
+            -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+        }
+    }
+
+    @-webkit-keyframes opaque {
+        0% {
+            opacity: 0.1;
+        }
+
+        40% {
+            opacity: 1;
+        }
+
+        80% {
+            opacity: 0.1;
+        }
+
+        100% {
+            opacity: 0.1;
+        }
+    }
+
+    @keyframes opaque {
+        0% {
+            opacity: 0.1;
+        }
+
+        40% {
+            opacity: 1;
+        }
+
+        80% {
+            opacity: 0.1;
+        }
+
+        100% {
+            opacity: 0.1;
+        }
+    }
+
+    @-webkit-keyframes mesh {
+        0% {
+            -webkit-transform-origin: 50% -100%;
+            transform-origin: 50% -100%;
+            -webkit-transform: rotate(0);
+            transform: rotate(0);
+        }
+
+        50% {
+            -webkit-transform-origin: 50% -100%;
+            transform-origin: 50% -100%;
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+
+        50.1% {
+            -webkit-transform-origin: 50% 200%;
+            transform-origin: 50% 200%;
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform-origin: 50% 200%;
+            transform-origin: 50% 200%;
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes mesh {
+        0% {
+            -webkit-transform-origin: 50% -100%;
+            transform-origin: 50% -100%;
+            -webkit-transform: rotate(0);
+            transform: rotate(0);
+        }
+
+        50% {
+            -webkit-transform-origin: 50% -100%;
+            transform-origin: 50% -100%;
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+
+        50.1% {
+            -webkit-transform-origin: 50% 200%;
+            transform-origin: 50% 200%;
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform-origin: 50% 200%;
+            transform-origin: 50% 200%;
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @media only screen and (max-width: 968px) {
+        .flexbox>div {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 33.3333333%;
+            flex: 0 0 33.3333333%;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .flexbox>div {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+        }
+    }
+
+    @media only screen and (max-width: 568px) {
+        .flexbox>div {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+        }
+    }
+</style>
+<!--  MESH LOADER  -->
+<div class="flexbox">
+    <div class="loader" id="loader">
+        <div class="mesh-loader">
+            <div class="set-one">
+                <div style="background-color: #1db954;" class="circle"></div>
+                <div style="background-color: #ff0047;" class="circle"></div>
+            </div>
+            <div class="set-two">
+                <div style="background-color: #dd2abd;" class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+</div>

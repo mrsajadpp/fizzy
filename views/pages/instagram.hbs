@@ -1,0 +1,21 @@
+<div class="container">
+    <form id="contact" action="/api/instagram/download" method="post">
+        <fieldset>
+            <img src="images/fizzyig.png" alt="fizzy">
+        </fieldset>
+        <br>
+        <fieldset>
+            <input placeholder="Instagram video link" type="url" tabindex="1" name="url" required autofocus>
+        </fieldset>
+        <fieldset>
+            <select tabindex="1" name="type" required autofocus>
+                <option value="mp4">MP4</option>
+                <option value="mp3">MP3</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <button onclick="adLoad();" type="submit" id="submit" title="Download"><box-icon name='cloud-download' type='solid'
+                    color='#ffffff'></box-icon></button>
+        </fieldset>
+    </form>
+</div>

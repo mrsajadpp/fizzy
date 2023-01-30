@@ -1,0 +1,21 @@
+<div class="container">
+    <form id="contact" action="/api/youtube/download" method="post">
+        <fieldset>
+            <img src="images/fizzyyt.png" alt="fizzy">
+        </fieldset>
+        <br>
+        <fieldset>
+            <input placeholder="YouTube video link" type="url" tabindex="1" name="url" required autofocus>
+        </fieldset>
+        <fieldset>
+            <select tabindex="1" name="type" required autofocus>
+                <option value="mp4">MP4</option>
+                <option value="mp3">MP3</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <button onclick="adLoad();" style="background-color: #ff0047;" title="Download" type="submit" id="submit"><box-icon name='cloud-download'
+                    type='solid' color='#ffffff'></box-icon></button>
+        </fieldset>
+    </form>
+</div>
