@@ -4,5 +4,5 @@ function hideLoader() {
         loader.style.display = 'none';
     }, 3000);
 }
-document.addEventListener('contextmenu', event => event.preventDefault());
+
 window.onload = hideLoader
