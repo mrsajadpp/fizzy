@@ -1,13 +1,16 @@
 var express = require('express');
+const http = require('url');
 var ytdl = require('ytdl-core');
+const youtubedl = require('youtube-dl')
+//var vidl = require('vimeo-downloader');
+//var Vimeo = require('vimeo').Vimeo;
+//var client = new Vimeo('84950d75fb4ae7c4fc2c72ee67b9b79ba8b9063c', 'ADVYL5AEJ0N1D0yRvX1b52mAR32qVDCYTJA1ZR7uEAd9IS4BDMZRro6c7bXai6eBtNhiuxK4LCZO5emP9wlTKLi71dryzbzyAdwVgc0M6QdwcATkO8ezIwxevIQSSJ8l', '3f84691064809744d9b4e25cb1b5ea50');
 const Spotify = require('spotifydl-core').default
 var ffmpeg = require('fluent-ffmpeg');
 let path = require('path');
 let fs = require('fs');
-let http = require('http');
 let request = require('request');
 //ffmpeg.setFfmpegPath("/app/vendor/ffmpeg/bin");
-var data = require('../database/data');
 var validUrl = require('valid-url');
 const { getVideoDurationInSeconds } = require('get-video-duration');
 var modules = require('../modules/modules')
@@ -68,12 +71,12 @@ router.post('/api/instagram/download', (req, res, next) => {
         })
       } else {
         if (req.body.type === 'mp4') {
-          modules.getDirUrl(req.body.url).then( async (url) => {
-              res.writeHead(200, {
-                "Content-Disposition": "attachment;filename=Instagram - " + new Date() + " - | Fizzy - fizzy.traceinc.in.mp4",
-                'Content-Type': 'video/mp4'
-              });
-              request(url).pipe(res);
+          modules.getDirUrl(req.body.url).then(async (url) => {
+            res.writeHead(200, {
+              "Content-Disposition": "attachment;filename=Instagram - " + new Date() + " - | Fizzy - fizzy.traceinc.in.mp4",
+              'Content-Type': 'video/mp4'
+            });
+            request(url).pipe(res);
           })
         }
       }
@@ -89,13 +92,20 @@ router.post('/api/youtube/download', async (req, res, next) => {
   try {
     if (ytdl.validateURL(req.body.url)) {
       if (req.body.type === 'mp3') {
-        res.header('Content-Disposition', 'attachment; filename="YouTube - ' + new Date() + '- | Fizzy - fizzy.traceinc.in.mp3"');
         let video = await ytdl(req.body.url, { format: 'mp3', filter: 'audioandvideo', quality: 'highest' });
+        res.header({ "Content-Disposition": "attachment;filename=YouTube - " + new Date() + " - | Fizzy - fizzy.traceinc.in.mp3" });
         ffmpeg(video).toFormat("mp3").on("error", (err) => console.log(err)).pipe(res)
       } else {
         if (req.body.type === 'mp4') {
-          res.header('Content-Disposition', 'attachment; filename="YouTube - ' + new Date() + '- | Fizzy - fizzy.traceinc.in.mp4"');
-          ytdl(req.body.url, { format: 'mp4', filter: 'audioandvideo', quality: 'highest' }).pipe(res);
+          const video = youtubedl(req.body.url, ['--format=18'], { cwd: __dirname })
+          video.on('info', function (info) {
+            res.writeHead(200, {
+              "Content-Disposition": "attachment;filename=YouTube - " + new Date() + " - | Fizzy - fizzy.traceinc.in.mp4",
+              'Content-Type': 'video/mp4',
+              'Content-Length': info.size
+            });
+            video.pipe(res)
+          })
         }
       }
     } else {
@@ -116,6 +126,14 @@ router.post('/api/spotify/download', async (req, res, next) => {
     } else {
       res.redirect('/spotify')
     }
+  } catch (err) {
+    console.error(err)
+  }
+})
+
+router.get('/api/vimeo/download', async (req, res, next) => {
+  try {
+
   } catch (err) {
     console.error(err)
   }
