@@ -25,7 +25,7 @@ const spotify = new Spotify(credentials)
 
 router.get('/', (req, res, next) => {
   try {
-    res.render('home', { title: 'Home', description: 'Social video downloader powered by "Trace inc".', user: req.session.user });
+    res.render('home', { title: 'Home', description: 'Social video downloader powered by "Trace inc".', err: false, user: req.session.user });
   } catch (err) {
     console.error(err)
   }
@@ -33,7 +33,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/spotify', (req, res, next) => {
   try {
-    res.render('spotify', { title: 'Spotify', description: 'Spotify music downloader.', user: req.session.user });
+    res.render('spotify', { title: 'Spotify', description: 'Spotify music downloader.', err: false, user: req.session.user });
   } catch (err) {
     console.error(err)
   }
@@ -41,7 +41,7 @@ router.get('/spotify', (req, res, next) => {
 
 router.get('/instagram', (req, res, next) => {
   try {
-    res.render('instagram', { title: 'Instagram', description: 'Instagram video downloader.', user: req.session.user });
+    res.render('instagram', { title: 'Instagram', description: 'Instagram video downloader.', err: false, user: req.session.user });
   } catch (err) {
     console.error(err)
   }
@@ -49,7 +49,7 @@ router.get('/instagram', (req, res, next) => {
 
 router.get('/youtube', (req, res, next) => {
   try {
-    res.render('youtube', { title: 'YouTube', description: 'YouTube video downloader.', user: req.session.user });
+    res.render('youtube', { title: 'YouTube', description: 'YouTube video downloader.', err: false, user: req.session.user });
   } catch (err) {
     console.error(err)
   }
@@ -81,7 +81,7 @@ router.post('/api/instagram/download', (req, res, next) => {
         }
       }
     } else {
-      res.redirect('/instagram')
+      res.render('instagram', { title: 'Instagram', description: 'Instagram video downloader.', err: 'You entered url is not valid please try again!', user: req.session.user });
     }
   } catch (err) {
     console.error(err)
@@ -97,16 +97,13 @@ router.post('/api/youtube/download', async (req, res, next) => {
         ffmpeg(video).toFormat("mp3").on("error", (err) => console.log(err)).pipe(res)
       } else {
         if (req.body.type === 'mp4') {
-          // const video = youtubedl(req.body.url, ['--format=18'], { cwd: __dirname })
-          let video = await ytdl(req.body.url, { format: 'mp3', filter: 'audioandvideo', quality: 'highest' });
-          //video.on('info', function (info) {
+          let video = await ytdl(req.body.url, { format: 'mp4', filter: 'audioandvideo', quality: 'highest' });
           res.header({ "Content-Disposition": "attachment;filename=YouTube - " + new Date() + " - | Fizzy - fizzy.traceinc.in.mp4" });
           video.pipe(res)
-          //})
         }
       }
     } else {
-      res.redirect('/youtube')
+      res.render('youtube', { title: 'YouTube', description: 'YouTube video downloader.', err: 'You entered url is not valid please try again!', user: req.session.user });
     }
   } catch (err) {
     console.error(err)

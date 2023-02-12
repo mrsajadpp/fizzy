@@ -7,7 +7,6 @@ let handlebars = require('express-handlebars');
 let session = require('express-session');
 let fileUpload = require('express-fileupload');
 let favicon = require("serve-favicon");
-let db = require('./database/config')
 
 var indexRouter = require('./routes/index');
 
