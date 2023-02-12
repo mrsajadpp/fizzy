@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -25,6 +25,8 @@
     "socket.io": "^4.5.4",
     "spotifydl-core": "^0.2.0",
     "valid-url": "^1.0.9",
+    "vimeo": "^2.1.1",
+    "vimeo-downloader": "^1.0.1",
     "ytdl-core": "^4.11.2"
   }
 }
