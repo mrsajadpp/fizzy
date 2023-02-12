@@ -68,7 +68,7 @@ router.post('/api/instagram/download', (req, res, next) => {
             });
             ffmpeg(url).toFormat("mp3").on("error", (err) => console.log(err)).pipe(res)
           }).catch((err) => {
-            res.render('instagram', { title: 'Instagram', description: 'Instagram video downloader.', err: 'Internal server error, we are trying to fix it please try again later!', user: req.session.user });
+            res.render('instagram', { title: 'Instagram', description: 'Instagram video downloader.', err: true, msg: 'Internal server error, we are trying to fix it please try again later!', user: req.session.user });
           })
         })
       } else {
@@ -80,16 +80,16 @@ router.post('/api/instagram/download', (req, res, next) => {
             });
             request(url).pipe(res);
           }).catch((err) => {
-            res.render('instagram', { title: 'Instagram', description: 'Instagram video downloader.', err: 'Internal server error, we are trying to fix it please try again later!', user: req.session.user });
+            res.render('instagram', { title: 'Instagram', description: 'Instagram video downloader.', err: true, msg: 'Internal server error, we are trying to fix it please try again later!', user: req.session.user });
           })
         }
       }
     } else {
-      res.render('instagram', { title: 'Instagram', description: 'Instagram video downloader.', err: 'You entered url is not valid please try again!', user: req.session.user });
+      res.render('instagram', { title: 'Instagram', description: 'Instagram video downloader.', err: true, msg: 'You entered url is not valid please try again!', user: req.session.user });
     }
   } catch (err) {
     console.error(err)
-    res.render('instagram', { title: 'Instagram', description: 'Instagram video downloader.', err: 'Internal server error, we are trying to fix it please try again later!', user: req.session.user });
+    res.render('instagram', { title: 'Instagram', description: 'Instagram video downloader.', err: true, msg: 'Internal server error, we are trying to fix it please try again later!', user: req.session.user });
   }
 })
 
@@ -108,11 +108,11 @@ router.post('/api/youtube/download', async (req, res, next) => {
         }
       }
     } else {
-      res.render('youtube', { title: 'YouTube', description: 'YouTube video downloader.', err: 'You entered url is not valid please try again!', user: req.session.user });
+      res.render('youtube', { title: 'YouTube', description: 'YouTube video downloader.', err: true, msg:'You entered url is not valid please try again!', user: req.session.user });
     }
   } catch (err) {
     console.error(err)
-    res.render('youtube', { title: 'YouTube', description: 'YouTube video downloader.', err: 'Internal server error, we are trying to fix it please try again later!', user: req.session.user });
+    res.render('youtube', { title: 'YouTube', description: 'YouTube video downloader.', err: true, msg: 'Internal server error, we are trying to fix it please try again later!', user: req.session.user });
   }
 })
 
@@ -124,11 +124,11 @@ router.post('/api/spotify/download', async (req, res, next) => {
       res.write(song, 'binary');
       res.end();
     } else {
-      res.render('spotify', { title: 'Spotify', description: 'Spotify music downloader.', err: 'You entered url is not valid please try again!', user: req.session.user });
+      res.render('spotify', { title: 'Spotify', description: 'Spotify music downloader.', err: true, msg:'You entered url is not valid please try again!', user: req.session.user });
     }
   } catch (err) {
     console.error(err)
-    res.render('spotify', { title: 'Spotify', description: 'Spotify music downloader.', err: 'Internal server error, we are trying to fix it please try again later!', user: req.session.user });
+    res.render('spotify', { title: 'Spotify', description: 'Spotify music downloader.', err: true, msg: 'Internal server error, we are trying to fix it please try again later!', user: req.session.user });
   }
 })
 
