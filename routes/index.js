@@ -97,15 +97,12 @@ router.post('/api/youtube/download', async (req, res, next) => {
         ffmpeg(video).toFormat("mp3").on("error", (err) => console.log(err)).pipe(res)
       } else {
         if (req.body.type === 'mp4') {
-          const video = youtubedl(req.body.url, ['--format=18'], { cwd: __dirname })
-          video.on('info', function (info) {
-            res.writeHead(200, {
-              "Content-Disposition": "attachment;filename=YouTube - " + new Date() + " - | Fizzy - fizzy.traceinc.in.mp4",
-              'Content-Type': 'video/mp4',
-              'Content-Length': info.size
-            });
-            video.pipe(res)
-          })
+          // const video = youtubedl(req.body.url, ['--format=18'], { cwd: __dirname })
+          let video = await ytdl(req.body.url, { format: 'mp3', filter: 'audioandvideo', quality: 'highest' });
+          //video.on('info', function (info) {
+          res.header({ "Content-Disposition": "attachment;filename=YouTube - " + new Date() + " - | Fizzy - fizzy.traceinc.in.mp4" });
+          video.pipe(res)
+          //})
         }
       }
     } else {
